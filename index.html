@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CubeFlow Enterprise AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', '"Noto Sans SC"', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+            // Redefine the font scale to be larger and more readable for enterprise use
+            fontSize: {
+              xs: ['0.85rem', { lineHeight: '1.4' }],    // ~13.6px (was 12px)
+              sm: ['0.95rem', { lineHeight: '1.5' }],    // ~15.2px (was 14px)
+              base: ['1.05rem', { lineHeight: '1.6' }],  // ~16.8px (was 16px)
+              lg: ['1.2rem', { lineHeight: '1.75' }],    // ~19.2px (was 18px)
+              xl: ['1.35rem', { lineHeight: '1.75' }],   // ~21.6px
+              '2xl': ['1.65rem', { lineHeight: '2' }],   // ~26.4px
+              '3xl': ['2.1rem', { lineHeight: '2.25' }],
+              '4xl': ['2.6rem', { lineHeight: '2.5' }],
+              '5xl': ['3.2rem', { lineHeight: '1' }],
+              '6xl': ['4rem', { lineHeight: '1' }],
+            },
+            colors: {
+              brand: {
+                50: '#eef2ff',
+                100: '#e0e7ff',
+                200: '#c7d2fe',
+                300: '#a5b4fc',
+                400: '#818cf8',
+                500: '#6366f1',  /* Primary Indigo */
+                600: '#4f46e5',
+                700: '#4338ca',
+                800: '#3730a3',
+                900: '#312e81',
+                950: '#1e1b4b',
+              },
+              slate: {
+                50: '#f8fafc',
+                100: '#f1f5f9',
+                200: '#e2e8f0',
+                300: '#cbd5e1',
+                400: '#94a3b8',
+                500: '#64748b',
+                600: '#475569',
+                700: '#334155',
+                800: '#1e293b',
+                900: '#0f172a',
+                950: '#020617',
+              },
+              sepia: {
+                50: '#fcf6e5',
+                100: '#f5ecd3',
+                200: '#ede0b8',
+                800: '#5d4037',
+                900: '#3e2723',
+              }
+            },
+            boxShadow: {
+              'glow': '0 0 20px rgba(99, 102, 241, 0.15)',
+              'glow-lg': '0 0 30px rgba(99, 102, 241, 0.25)',
+              'dark-glow': '0 0 20px rgba(99, 102, 241, 0.1)',
+              'suspended': '0 10px 40px -10px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,255,255,0.6) inset',
+              'suspended-dark': '0 10px 40px -10px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05) inset',
+              'suspended-hover': '0 25px 50px -12px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(255,255,255,0.8) inset',
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.4s ease-out forwards',
+              'slide-up': 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'slide-down': 'slideDown 0.2s ease-out forwards',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideUp: {
+                '0%': { transform: 'translateY(20px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              },
+              slideDown: {
+                '0%': { transform: 'translateY(-10px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      :root {
+        --wallpaper-bg: #f0f4f8;
+      }
+      body {
+        font-family: 'Plus Jakarta Sans', 'Noto Sans SC', sans-serif;
+        background-color: transparent;
+        overflow-x: hidden;
+        color: #334155;
+        transition: color 0.5s ease;
+        font-size: 16px; /* Base override just in case */
+      }
+      .dark body { color: #f1f5f9; }
+      
+      /* Optimized Eye Care Mode */
+      .eye-care body {
+        filter: sepia(0.25) contrast(0.95) brightness(0.95);
+        background-color: #fdf6e3;
+      }
+      .eye-care .glass-panel {
+        background: rgba(255, 253, 240, 0.7);
+        border-color: rgba(230, 220, 200, 0.5);
+      }
+
+      .bg-mesh {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        z-index: -1;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        transition: background 0.8s ease-in-out;
+      }
+      .glass-panel {
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.25));
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+      }
+      .dark .glass-panel {
+        background: linear-gradient(145deg, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.4));
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+      }
+      .glass-panel-hover:hover {
+        transform: translateY(-4px) scale(1.002);
+        box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+        z-index: 10;
+      }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      ::-webkit-scrollbar { width: 6px; height: 6px; }
+      ::-webkit-scrollbar-thumb { background: rgba(203, 213, 225, 0.5); border-radius: 10px; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.1",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.22.3?external=react,react-dom",
+    "@remix-run/router": "https://esm.sh/@remix-run/router@1.15.3",
+    "axios": "https://esm.sh/axios@1.6.8",
+    "vite": "https://aistudiocdn.com/vite@^7.2.7",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.2",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "path": "https://aistudiocdn.com/path@^0.12.7",
+    "url": "https://esm.sh/url@^0.11.4"
+  }
+}
+</script>
+</head>
+  <body>
+    <div class="bg-mesh" id="wallpaper-mesh"></div>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
